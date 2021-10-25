@@ -26,6 +26,9 @@
     "types": [
       "@nuxt/types",
       "@types/node",
+      "@nuxtjs/axios",
+      "@nuxtjs/auth",
+      "@types/nuxtjs__auth",
       "vuetify"
     ]
   },

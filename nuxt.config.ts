@@ -42,6 +42,8 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -76,6 +78,61 @@ export default {
         }
       }
     }
+  },
+
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/',
+      home: false
+    },
+    localStorage: false, // REALLY not secure, so nah
+    resetOnError: true, // kick the user if any error happens w/ the auth
+    /* cookie: {
+      prefix: 'auth.',
+      options: {
+        path: '/',
+        expires: 86400
+      }
+    }, */
+    strategies: {
+      local: {
+        token: {
+          required: false,
+          type: false
+        },
+        user: {
+          property: 'user',
+          autoFetch: false
+        },
+        endpoints: {
+          login: {
+            url: '/api/signin',
+            method: 'post',
+            propertyName: false
+          },
+          logout: {
+            url: '/logout',
+            method: 'post'
+          },
+          user: false
+          /* ,
+          user: {
+            url: '/user/auth',
+            method: 'get',
+            propertyName: 'user'
+          } */
+        },
+        tokenRequired: false,
+        tokenType: 'Bearer'
+      }
+    }
+  },
+
+  axios: {
+    baseURL: process.env.API_URI, // Used as fallback if no runtime config is provided
+    credentials: true
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
