@@ -96,11 +96,9 @@ export default {
     strategies: {
       local: {
         cookie: false,
-        user: {
-          property: 'user'
-        },
         token: {
-          property: 'token'
+          property: 'token',
+          required: true
         },
         endpoints: {
           login: {
