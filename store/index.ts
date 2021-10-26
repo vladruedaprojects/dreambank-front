@@ -1,4 +1,5 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
+import IAccount from '~/models/account'
 import IUser from '~/models/user'
  
 @Module
@@ -11,6 +12,8 @@ export default class user extends VuexModule {
     avatar: '',
     password: ''
   }
+
+  accountQuery: IAccount | null = null
  
   @Mutation
   setUser(user: IUser) {
@@ -18,6 +21,11 @@ export default class user extends VuexModule {
     this.user.name = user.name
     this.user.avatar = user.avatar
     this.user.email = user.email
+  }
+
+  @Mutation
+  setAccountQuery(account: IAccount) {
+    this.accountQuery = account
   }
 
 }

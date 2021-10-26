@@ -1,4 +1,5 @@
 interface IAccount {
+  _id: string | null
   user: string | null
   product: string | null
   name: string

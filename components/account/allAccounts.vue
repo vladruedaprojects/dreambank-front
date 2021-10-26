@@ -6,6 +6,7 @@
           :items="accounts"
           :headers="headers"
           title="All Accounts"
+          @selected="(account) => goTransactions(account)"
         ></ui-table>
       </v-card-text>
     </ui-card>
@@ -13,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, VModel } from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator'
 import UiTable from '@/components/ui/UiTable.vue'
 import IAccount from '@/models/account'
 
@@ -21,8 +22,6 @@ import IAccount from '@/models/account'
   components: { UiTable }
 })
 export default class AllAccounts extends Vue {
-  @VModel({ type: Array, default: () => [] }) selected!: object
-
   selectedItem: object = {}
 
   headers: object = [
@@ -81,6 +80,11 @@ export default class AllAccounts extends Vue {
 
   async getAccounts() {
     this.accounts = await this.$axios.$get('/account/all')
+  }
+
+  goTransactions (account: IAccount) {
+    this.$store.commit('setAccountQuery', account)
+    this.$router.push(`/transaction/account/${account._id}`)
   }
 
 }
