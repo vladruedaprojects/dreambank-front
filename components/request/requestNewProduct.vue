@@ -44,6 +44,9 @@
                     <v-col cols="8">
                       <ui-select
                         label="Product"
+                        :items="products"
+                        item-key="_id"
+                        item-text="name"
                         dark
                         hide-details="auto"
                       ></ui-select>
@@ -79,6 +82,8 @@
                       small
                       rounded
                       class="mt-2"
+                      width="300px"
+                      @click="$emit('input', false)"
                     >Cancel</v-btn>
                   </div>
               </v-card>
@@ -95,7 +100,7 @@
   </v-dialog>
 </template>
 
-<script>
+<script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import TopLogo from '@/components/layout/center/topLogo.vue'
 
@@ -103,7 +108,11 @@ import TopLogo from '@/components/layout/center/topLogo.vue'
   components: { TopLogo }
 })
 export default class RequestNewProduct extends Vue {
-  // @VModel({ type: Boolean, default: () => [] }) dialog!: boolean
+  products: object = []
+
+  async mounted () {
+    this.products = await this.$axios.$get('/product/all')
+  }
 }
 </script>
 

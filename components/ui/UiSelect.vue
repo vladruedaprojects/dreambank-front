@@ -8,11 +8,10 @@
         v-bind="$attrs"
         outlined
         dark="dark"
-        :items="['uno', 'dos']"
         dense
         class="rounded-lg"
         item-color="white"
-        color="primary"
+        color="white"
         :menu-props="{ offsetY: true }"
         v-on="$listeners"
       >
@@ -31,6 +30,7 @@ export default class UiSelectComponent extends Vue {
   @Prop({ type: Array, default: () => [3, 9] }) cols!: object
 }
 </script>
+
 <style lang="scss" scoped>
   .theme--light.v-application{
     background-color: #436199;
