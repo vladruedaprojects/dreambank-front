@@ -25,6 +25,7 @@
           label="Login"
           type="text"
           :rules="[v => !!v || 'Required']"
+          :append-icon="!!user.idCard ? 'mdi-check' : undefined"
           hide-details="auto"
         ></ui-textfield>
         <ui-textfield
@@ -33,6 +34,7 @@
           class="mt-2"
           type="password"
           :rules="[v => !!v && v.length > 3 || 'Please, enter a valid password']"
+          :append-icon="!!user.password && user.password.length > 3 ?  'mdi-check' : undefined"
           hide-details="auto"
           @keyup.enter="login"
           @keydown.space.prevent
@@ -100,17 +102,20 @@ export default class LoginComponent extends Vue {
   async login () {
     try {
       if (this.form.validate()) {
-        const response: object = await this.$auth.loginWith('local', {
+        const response = await this.$auth.loginWith('local', {
           data: this.user
         })
 
         console.log(response)
         this.$router.replace('/account/accounts')
       } else {
+        this.user.idCard = ''
+        this.user.password = ''
         console.log('Access denied!')
       }
-    } catch (error) {
-      console.log(error)
+    } catch (e) {
+      this.user.idCard = ''
+      this.user.password = ''
     }
   }
 }
