@@ -52,6 +52,7 @@
     </v-row>
 
     <request-new-product
+      v-if="requestDialog"
       v-model="requestDialog"
     ></request-new-product>
   </v-card>

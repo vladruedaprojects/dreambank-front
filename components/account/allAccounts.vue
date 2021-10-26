@@ -109,5 +109,13 @@ export default class AllAccounts extends Vue {
     }
   ]
 
+  /* async mounted () {
+    await this.getAccounts()
+  }
+
+  async getAccounts() {
+    this.accounts = await this.$axios.$get('/account/all')
+  } */
+
 }
 </script>
