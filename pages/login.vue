@@ -8,7 +8,7 @@ import LoginComponent from '@/components/user/login.vue'
 
 @Component({
   components: { LoginComponent },
-  layout: 'ceneter'
+  layout: 'center'
 })
 export default class Login extends Vue  {}
 </script>

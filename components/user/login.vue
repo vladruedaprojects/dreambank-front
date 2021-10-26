@@ -19,7 +19,7 @@
       </v-row>
     </v-card-title>
     <v-card-text>
-      <v-form>
+      <v-form ref="loginForm">
         <ui-textfield
           v-model="user.idCard"
           label="Login"
@@ -32,11 +32,11 @@
         ></ui-textfield>
       </v-form>
 
-      <v-row ref="formLogin" no-gutters>
+      <v-row no-gutters>
       <v-col cols="3"></v-col>
       <v-col cols="9">
         <ui-button
-          to="/account/accounts"
+          @click="login"
         >
           Login
         </ui-button>
@@ -68,6 +68,7 @@
 
 <script lang="ts">
 import { Vue, Component, Ref } from 'vue-property-decorator'
+import {VForm } from '@/types/types'
 import IUser from '@/models/user'
 
 @Component
@@ -81,19 +82,22 @@ export default class LoginComponent extends Vue {
     avatar: ''
   }
 
-  @Ref('loginForm') readonly form!: HTMLFormElement
+  @Ref('loginForm') readonly form!: VForm
 
   async login () {
-    if (this.form.validate()) {
-      try {
-        const response = await this.$auth.loginWith('local', {
+    try {
+      if (this.form.validate()) {
+        const response: object = await this.$auth.loginWith('local', {
           data: this.user
         })
 
         console.log(response)
-      } catch (error) {
-        console.log(error)
+        this.$router.replace('/account/accounts')
+      } else {
+        console.log('Access denied!')
       }
+    } catch (error) {
+      console.log(error)
     }
   }
 }

@@ -32,6 +32,10 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
+  router: {
+    middleware: ['auth']
+  },
+
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
@@ -83,37 +87,28 @@ export default {
   auth: {
     redirect: {
       login: '/login',
-      logout: '/',
-      callback: '/',
-      home: false
+      logout: '/login',
+      callback: '/login',
+      home: '/login'
     },
-    localStorage: false, // REALLY not secure, so nah
+    localStorage: true, // REALLY not secure, so nah
     resetOnError: true, // kick the user if any error happens w/ the auth
-    /* cookie: {
-      prefix: 'auth.',
-      options: {
-        path: '/',
-        expires: 86400
-      }
-    }, */
     strategies: {
       local: {
-        token: {
-          required: false,
-          type: false
-        },
+        cookie: false,
         user: {
-          property: 'user',
-          autoFetch: false
+          property: 'user'
+        },
+        token: {
+          property: 'token'
         },
         endpoints: {
           login: {
-            url: '/api/signin',
-            method: 'post',
-            propertyName: false
+            url: '/user/signin',
+            method: 'post'
           },
           logout: {
-            url: '/logout',
+            url: '/user/logout',
             method: 'post'
           },
           user: false
@@ -124,8 +119,8 @@ export default {
             propertyName: 'user'
           } */
         },
-        tokenRequired: false,
-        tokenType: 'Bearer'
+        rewriteRedirects: true,
+        fullPathRedirect: true
       }
     }
   },
