@@ -44,6 +44,8 @@ export default {
     '@nuxtjs/vuetify',
   ],
 
+  transpileDependencies: ['vuex-module-decorators'],
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
