@@ -6,7 +6,7 @@ import UiButton from '@/components/ui/UiButton.vue'
 import UiLabel from '@/components/ui/UiLabel.vue'
 import UiTextfield from '@/components/ui/UiTextfield.vue'
 
-import CardUnderConstruction from '@/components/cardUnderConstruction.vue'
+import CardUnderConstruction from '~/components/ui/cardUnderConstruction.vue'
 
 Vue.component('ui-card', UiCard)
 Vue.component('ui-button', UiButton)

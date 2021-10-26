@@ -91,11 +91,14 @@ export default {
       callback: '/login',
       home: '/login'
     },
-    localStorage: true, // REALLY not secure, so nah
+    localStorage: false, // REALLY not secure, so nah
     resetOnError: true, // kick the user if any error happens w/ the auth
     strategies: {
       local: {
         cookie: false,
+        user: {
+          property: 'uesr',
+        },
         token: {
           property: 'token',
           required: true
@@ -110,12 +113,6 @@ export default {
             method: 'post'
           },
           user: false
-          /* ,
-          user: {
-            url: '/user/auth',
-            method: 'get',
-            propertyName: 'user'
-          } */
         },
         rewriteRedirects: true,
         fullPathRedirect: true
