@@ -115,7 +115,7 @@ export default class LoginComponent extends Vue {
         const response: ServerResponse = await this.$auth.loginWith('local', {
           data: this.user
         })
-        
+
         this.$store.commit('setUser', response.data.user)
         this.$router.replace('/account/accounts')
       } else {
@@ -131,15 +131,6 @@ export default class LoginComponent extends Vue {
 </script>
 
 <style lang="scss" scoped>
-  .under-welcome {
-    border-bottom: 2px solid $success;
-    width: 70px;
-    margin: 0 auto 12px;
-  }
-  .login-info {
-    font-size: 11px;
-    line-height: 14px;
-  }
   .card-width {
     width: 480px !important;
   }

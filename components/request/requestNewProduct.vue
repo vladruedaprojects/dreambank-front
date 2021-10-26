@@ -99,18 +99,26 @@
       </v-card-text>
 
       <v-card-text v-else>
-        <ui-header-card-title
-          header="Request"
-          title="Request success"
-          text=""
-        >
-          <template #text>
-            Your order has been sent successfully.<br>
-            an advisor will contact you soon
-          </template>
-        </ui-header-card-title>
-
+          <ui-header-card-title
+            header="Request"
+            title="Request success"
+            text=""
+            class="mt-15"
+          >
+            <template #text>
+              Your order has been sent successfully.<br>
+              an advisor will contact you soon
+            </template>
+            <v-btn
+              rounded
+              dark
+              class="success mt-4 m-auto elevation-0 title text-capitalize black--text"
+              width="300px"
+              @click.stop="$emit('input', false)"
+            >Go Home</v-btn>
+          </ui-header-card-title>
       </v-card-text>
+
     </v-card>
   </v-dialog>
 </template>

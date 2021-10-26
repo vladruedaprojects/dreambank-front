@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pb-0">
+  <v-container class="pb-0" :class="dark ? 'white--text' : ''">
     <v-row no-gutters align="center" justify="center">
       <v-col cols="9">
         <div class="body-1 font-weight-bold text-center">
@@ -13,11 +13,14 @@
             {{ title }}
           </slot>
         </h4>
-        <p class="mt-2 request-info text-center">
+        <p class="mt-2 text-info text-center">
           <slot name="text">
             {{ text }}
           </slot>
         </p>
+        <div class="mt-2 text-center">
+          <slot />
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -31,6 +34,7 @@ export default class UiHeaderCardTitle extends Vue {
   @Prop({ type: String, default: '' }) readonly header !: string
   @Prop({ type: String, default: '' }) readonly title !: string
   @Prop({ type: String, default: '' }) readonly text !: string
+  @Prop({ type: Boolean, default: false }) readonly dark !: boolean
 }
 </script>
 
@@ -40,7 +44,7 @@ export default class UiHeaderCardTitle extends Vue {
     width: 70px;
     margin: 0 auto 12px;
   }
-  .request-info {
+  .text-info {
     font-size: 11px;
     line-height: 14px;
   }
