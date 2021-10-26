@@ -15,6 +15,7 @@
 <script lang="ts">
 import { Vue, Component, VModel } from 'vue-property-decorator'
 import UiTable from '@/components/ui/UiTable.vue'
+import IAccount from '@/models/account'
 
 @Component({
   components: { UiTable }
@@ -29,7 +30,8 @@ export default class AllAccounts extends Vue {
       text: '',
       align: 'center',
       sortable: false,
-      value: 'icon',
+      value: 'product',
+      subValue: 'icon',
       type: 'icon',
       class: 'primary--text'
     },
@@ -37,7 +39,8 @@ export default class AllAccounts extends Vue {
       text: 'Type',
       align: 'left',
       sortable: true,
-      value: 'accountType.name',
+      value: 'product',
+      subValue: 'productType',
       class: 'primary--text'
     },
     {
@@ -70,52 +73,15 @@ export default class AllAccounts extends Vue {
     }
   ]
 
-  accounts: object = [
-    {
-      _id: '1',
-      icon: 'fas fa-money-check-alt', // piggy-bank
-      accountType: {
-        _id: '0',
-        name: 'Checking'
-      },
-      name: '1267451****- WOLFE',
-      status: true, // Active
-      currency: 'USD',
-      balance: 6266.33
-    },
-    {
-      _id: '2',
-      icon: 'fas fa-piggy-bank',
-      accountType: {
-        _id: '1',
-        name: 'Savings'
-      },
-      name: '5719371****- MAENGUNE',
-      status: true,
-      currency: 'USD',
-      balance: 10998.10
-    },
-    {
-      _id: '3',
-      icon: 'fas fa-piggy-bank',
-      accountType: {
-        _id: '1',
-        name: 'Savings'
-      },
-      name: '7125781****- KAISER',
-      status: false,
-      currency: 'USD',
-      balance: 23.86
-    }
-  ]
+  accounts: IAccount[] = []
 
-  /* async mounted () {
+  async mounted () {
     await this.getAccounts()
   }
 
   async getAccounts() {
     this.accounts = await this.$axios.$get('/account/all')
-  } */
+  }
 
 }
 </script>

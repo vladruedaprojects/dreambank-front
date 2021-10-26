@@ -28,11 +28,11 @@
             :class="selectedItem._id === item._id ? 'item-selected' : ''"
           >
             <v-icon small color="grey">
-              {{ item[header.value] }}
+              {{ !header.subValue ? item[header.value] : item[header.value][header.subValue] }}
             </v-icon>
           </td>
           <td v-else :key="i" :align="header.align">
-            {{ item[header.value] }}
+            {{ !header.subValue ? item[header.value] : item[header.value][header.subValue] }}
           </td>
         </template>
       </tr>
@@ -56,6 +56,7 @@ export default class UiTable extends Vue {
     this.selectedItem = item
     this.$emit('selected', item)
   }
+
 }
 </script>
 

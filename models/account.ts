@@ -6,8 +6,8 @@ interface IAccount {
   currency: string
   balance: number
   status: boolean
-  createdAt: number
-  updatedAt: number
+  createdAt?: number
+  updatedAt?: number
 }
 
 export default IAccount
