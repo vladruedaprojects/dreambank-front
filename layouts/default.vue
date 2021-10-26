@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <drawer-master></drawer-master>
-    <top-bar></top-bar>
+    <top-bar @logout="logout"></top-bar>
 
     <v-main>
       <secondary-bar></secondary-bar>
@@ -20,19 +20,21 @@
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
 import DrawerMaster from '@/components/layout/default/drawerMaster.vue'
 import TopBar from '@/components/layout/default/topBar.vue'
 import SecondaryBar from '@/components/layout/default/secondaryBar.vue'
 
-export default {
-  components: { DrawerMaster, TopBar, SecondaryBar },
-  data () {
-    return {
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
-    }
+@Component({
+  components: { DrawerMaster, TopBar, SecondaryBar }
+})
+export default class Default extends Vue {
+  right: boolean = true
+  rightDrawer: boolean = false
+
+  async logout () {
+    await this.$auth.logout()
   }
 }
 </script>

@@ -49,6 +49,7 @@
     </v-list>
   </v-navigation-drawer>
 </template>
+
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 
@@ -69,7 +70,7 @@ export default class DrawerMaster extends Vue {
     {
       title: 'Account Summary',
       to: '/account/accountSummary',
-      active: true
+      active: false
     },
     {
       title: 'Accounts',
@@ -80,7 +81,7 @@ export default class DrawerMaster extends Vue {
     {
       title: 'Inquire Transactions',
       to: '/account/transactions',
-      active: true
+      active: false
     },
     {
       title: 'Fund Transfer',

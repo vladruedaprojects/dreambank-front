@@ -57,6 +57,19 @@
         {{ user.name }}
       </div>
       <v-icon class="mb-1 ml-2">mdi-menu-down</v-icon>
+      <v-tooltip bottom>
+        <template #activator="{ on }">
+          <v-icon
+            class="ml-2 mb-1"
+            color="success darken-1"
+            v-on="on"
+            @click="$emit('logout')"
+          >
+            mdi-power
+          </v-icon>
+        </template>
+        <span>Logout</span>
+      </v-tooltip>
     </v-row>
   </v-app-bar>
 </template>
