@@ -93,7 +93,6 @@ export default class Transaction extends Vue {
 
   async getTransactions() {
     if (this.accountId) {
-      console.log(this.$store.state.accountQuery)
       this.transactions = await this.$axios.$get(`/transaction/account${this.accountId}`)
       this.account = this.$store.state.accountQuery
     }
