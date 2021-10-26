@@ -1,21 +1,23 @@
-export const state = () => ({
-  count: 15
-})
-
-export const mutations = {
-  add (state: any, increment: Number) {
-    state.count += increment
+import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
+import IUser from '~/models/user'
+ 
+@Module
+export default class user extends VuexModule {
+  user: IUser = {
+    _id: null,
+    idCard: '',
+    name: '',
+    email: '',
+    avatar: '',
+    password: ''
   }
-}
-
-export const getters = {
-  getCount (state: any) {
-    return state.count
+ 
+  @Mutation
+  setUser(user: IUser) {
+    this.user.idCard = user.idCard
+    this.user.name = user.name
+    this.user.avatar = user.avatar
+    this.user.email = user.email
   }
-}
 
-export const actions = {
-  add (context: any, increment: Number) {
-    context.commit('add', increment)
-  }
 }

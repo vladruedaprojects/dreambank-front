@@ -14,7 +14,7 @@
               color="white"
             >
               <v-img
-                src="https://cdn.vuetifyjs.com/images/lists/2.jpg"
+                :src="user.avatar || 'https://cdn.vuetifyjs.com/images/lists/2.jpg'"
               ></v-img>
             </v-avatar>
           </v-list-item-avatar>
@@ -60,6 +60,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import RequestNewProduct from '@/components/request/requestNewProduct.vue'
+import IUser from '~/models/user'
 
 @Component({
   components: { RequestNewProduct }
@@ -68,10 +69,7 @@ export default  class SecondaryBar extends Vue {
   // @VModel({ type: Boolean, default: false }) requestDialog!: boolean
   requestDialog: boolean = false
 
-  user: object = {
-    name: 'Victor',
-    lastLogin: '09/06/2021 05:34:00 PM PHT'
-  }
+  user: IUser = this.$store.state.user
 
   get smallScreen (): Boolean {
     return this.$vuetify.breakpoint.mdAndDown

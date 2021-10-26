@@ -22,79 +22,94 @@
         </top-logo>
       </v-card-title>
 
-      <v-card-text>
+      <v-card-text v-if="!successful" class="pb-0">
         <v-card flat class="transparent" height="100%" width="800">
-          <v-container>
-            <v-row no-gutters align="center" justify="center">
-              <v-col cols="9">
-                <div class="body-1 font-weight-bold text-center">
-                  Request
-                </div>
-                <div class="under-request" />
-                <h4 class="text-h4 font-weight-bold text-center">
-                  New product
-                </h4>
-                <p class="mt-6 request-info text-center">
-                  Instant payments, and a lot eithdrawal method available.
-                </p>
-              </v-col>
-              <v-col>
-                <v-card flat class="transparent" width="600" style="margin: 10px auto;">
-                  <v-row justify="center" class="mr-6">
-                    <v-col cols="8">
-                      <ui-select
-                        label="Product"
-                        :items="products"
-                        item-key="_id"
-                        item-text="name"
-                        dark
-                        hide-details="auto"
-                      ></ui-select>
-                    </v-col>
-                    <v-col cols="8">
-                      <ui-textfield
-                        label="Cellphone"
-                        dark
-                        hide-details="auto"
-                      ></ui-textfield>
-                    </v-col>
-                    <v-col cols="8">
-                      <ui-textfield
-                        label="Monthly income"
-                        dark
-                        hide-details="auto"
-                        extend-label
-                      ></ui-textfield>
-                    </v-col>
-                  </v-row>
-                  <div class="text-center">
-                    <ui-button
-                      class="success black--text mt-6 m-auto"
-                      :block="false"
-                      width="300px"
-                    >
-                      Send
-                    </ui-button>
-                  </div>
-                  <div class="text-center">
-                    <v-btn
-                      text
-                      small
-                      rounded
-                      class="mt-2"
-                      width="300px"
-                      @click="$emit('input', false)"
-                    >Cancel</v-btn>
-                  </div>
-              </v-card>
-              </v-col>
-            </v-row>
+          <ui-header-card-title
+            header="Request"
+            title="New product"
+            text="Instant payments, and a lot eithdrawal method available."
+          >
+          </ui-header-card-title>
 
-            <v-row justify="center">
-              
-            </v-row>
-          </v-container>
+          <v-card flat class="transparent" width="600" style="margin: 10px auto;">
+            <v-form>
+              <v-row dense justify="center" class="mr-6 pb-0">
+                <v-col cols="8">
+                  <ui-select
+                    v-model="requestProduct.product"
+                    label="Product"
+                    :items="products"
+                    item-value="_id"
+                    item-text="name"
+                    :rules="[v => !!v || 'Required']"
+                    required
+                    dark
+                    hide-details="auto"
+                  ></ui-select>
+                </v-col>
+                <v-col cols="8">
+                  <ui-textfield
+                    v-model="requestProduct.cellphone"
+                    label="Cellphone"
+                    dark
+                    hide-details="auto"
+                    :rules="[v => !!v && v.length > 6 || 'Enter a valid cellphone']"
+                    hint="Write the number you want to be contacted at"
+                    persistent-hint
+                    class="mt-1"
+                  ></ui-textfield>
+                </v-col>
+                <v-col cols="8">
+                  <ui-textfield
+                    v-model="requestProduct.monthlyIncome"
+                    label="Monthly income"
+                    dark
+                    hide-details="auto"
+                    extend-label
+                    :rules="[v => !!v || 'Required']"
+                    hint="Give as an average income"
+                    persistent-hint
+                  ></ui-textfield>
+                </v-col>
+              </v-row>
+            </v-form>
+
+            <div class="text-center">
+              <v-btn
+                rounded
+                dark
+                class="success mt-4 m-auto elevation-0 title text-capitalize black--text"
+                width="300px"
+                :disabled="!validateForm"
+                @click.stop="sendRequest"
+              >Send</v-btn>
+            </div>
+            <div class="text-center">
+              <v-btn
+                text
+                small
+                rounded
+                class="mt-2"
+                width="300px"
+                @click="$emit('input', false)"
+              >Cancel</v-btn>
+            </div>
+          </v-card>
         </v-card>
+      </v-card-text>
+
+      <v-card-text v-else>
+        <ui-header-card-title
+          header="Request"
+          title="Request success"
+          text=""
+        >
+          <template #text>
+            Your order has been sent successfully.<br>
+            an advisor will contact you soon
+          </template>
+        </ui-header-card-title>
+
       </v-card-text>
     </v-card>
   </v-dialog>
@@ -103,27 +118,45 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import TopLogo from '@/components/layout/center/topLogo.vue'
+import UiHeaderCardTitle from '@/components/ui/UiHeaderCardTitle.vue'
+
+import IRequestProduct from '@/models/requestProduct'
 
 @Component({
-  components: { TopLogo }
+  components: { TopLogo, UiHeaderCardTitle }
 })
 export default class RequestNewProduct extends Vue {
   products: object = []
+  successful: boolean = false
+  requestProduct: IRequestProduct = {
+    _id: null,
+    product: '',
+    user: '',
+    cellphone: '',
+    monthlyIncome: 0,
+    status: false,
+    createdAt: null,
+    updatedAt: null
+  }
+
+  get validateForm () {
+    return this.requestProduct.product && this.requestProduct.cellphone.length > 6 && this.requestProduct.monthlyIncome
+  }
 
   async mounted () {
     this.products = await this.$axios.$get('/product/all')
   }
+
+  async sendRequest () {
+    try {
+      const response = await this.$axios.$post('/requestproduct/new', this.requestProduct)
+      this.$emit('new-request', response)
+      if (response) {
+        this.successful = true
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
 }
 </script>
-
-<style lang="scss" scoped>
-  .under-request {
-    border-bottom: 2px solid $success;
-    width: 70px;
-    margin: 0 auto 12px;
-  }
-  .request-info {
-    font-size: 11px;
-    line-height: 14px;
-  }
-</style>

@@ -50,11 +50,27 @@
         class="ml-4"
       >
         <v-img
-          src="https://cdn.vuetifyjs.com/images/lists/2.jpg"
+          :src="user.avatar || 'https://cdn.vuetifyjs.com/images/lists/2.jpg'"
         ></v-img>
       </v-avatar>
-      <div class="font-weight-regular body-2 ml-2 mb-1 primary--text">Victor Warren</div>
+      <div class="font-weight-regular body-2 ml-2 mb-1 primary--text">
+        {{ user.name }}
+      </div>
       <v-icon class="mb-1 ml-2">mdi-menu-down</v-icon>
     </v-row>
   </v-app-bar>
 </template>
+
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+import IUser from '~/models/user'
+
+@Component
+export default  class SecondaryBar extends Vue { 
+  user: IUser = this.$store.state.user
+
+  get smallScreen (): Boolean {
+    return this.$vuetify.breakpoint.mdAndDown
+  }
+}
+</script>

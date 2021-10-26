@@ -111,13 +111,3 @@ export default class AllAccounts extends Vue {
 
 }
 </script>
-
-<style lang="scss" scoped>
-  .item-selected {
-    border-left: 2px solid $success !important;
-    background: linear-gradient(90deg, rgba(224, 224, 224, 0.5) 5%, rgba(224, 224, 224, 0.2) 94%);
-  }
-  .header-border {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  }
-</style>

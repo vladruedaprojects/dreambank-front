@@ -26,14 +26,14 @@ export default class UiButtonComponent extends Vue {
   @Prop({ type: Boolean, default: false }) readonly dark!: boolean
   @Prop({ type: Boolean, default: false }) readonly disabled!: boolean
   @Prop({ type: Boolean, default: true }) readonly block!: boolean
-  @Prop({ type: String, default: '' }) readonly color!: boolean
+  @Prop({ type: String, default: '' }) readonly color!: string
 
   get classButton (): string {
     let classBt = ''
 
     if (this.disabled) classBt += 'disabledColor '
     if (!this.dark) classBt += 'primary '
-    else classBt += 'white--text '
+    else classBt += 'primary--text '
 
     return classBt
   }
