@@ -111,7 +111,6 @@ export default class LoginComponent extends Vue {
       } else {
         this.user.idCard = ''
         this.user.password = ''
-        console.log('Access denied!')
       }
     } catch (e) {
       this.user.idCard = ''

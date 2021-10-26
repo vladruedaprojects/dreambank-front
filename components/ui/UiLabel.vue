@@ -14,7 +14,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 export default class UiLabelComponent extends Vue {
     @Prop({ type: String, default: '' }) readonly text!: string
     @Prop({ type: Boolean, default: false }) readonly dark!: boolean
-    @Prop({ type: String, default: 'primary--text' }) readonly classText!: string
+    @Prop({ type: String, default: 'primary--text caption' }) readonly classText!: string
     @Prop({ type: Boolean, default: false }) readonly center!: boolean
 }
 </script>

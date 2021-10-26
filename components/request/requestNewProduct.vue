@@ -21,6 +21,7 @@
           </template>
         </top-logo>
       </v-card-title>
+
       <v-card-text>
         <v-card flat class="transparent" height="100%" width="800">
           <v-container>
@@ -38,23 +39,48 @@
                 </p>
               </v-col>
               <v-col>
-                <v-card flat class="transparent" width="600" style="margin: 20px auto; margin-left: 40px;">
-                  <v-row justify="center">
+                <v-card flat class="transparent" width="600" style="margin: 10px auto;">
+                  <v-row justify="center" class="mr-6">
                     <v-col cols="8">
-                      <ui-textfield
+                      <ui-select
                         label="Product"
                         dark
-                      ></ui-textfield>
+                        hide-details="auto"
+                      ></ui-select>
+                    </v-col>
+                    <v-col cols="8">
                       <ui-textfield
                         label="Cellphone"
                         dark
+                        hide-details="auto"
                       ></ui-textfield>
+                    </v-col>
+                    <v-col cols="8">
                       <ui-textfield
                         label="Monthly income"
                         dark
+                        hide-details="auto"
+                        extend-label
                       ></ui-textfield>
                     </v-col>
                   </v-row>
+                  <div class="text-center">
+                    <ui-button
+                      class="success black--text mt-6 m-auto"
+                      :block="false"
+                      width="300px"
+                    >
+                      Send
+                    </ui-button>
+                  </div>
+                  <div class="text-center">
+                    <v-btn
+                      text
+                      small
+                      rounded
+                      class="mt-2"
+                    >Cancel</v-btn>
+                  </div>
               </v-card>
               </v-col>
             </v-row>
