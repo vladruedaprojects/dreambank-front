@@ -69,7 +69,7 @@ export default class DrawerMaster extends Vue {
     { header: 'ACCOUNTS' },
     {
       title: 'Account Summary',
-      to: '/account/accountSummary',
+      to: '/transaction/account:?',
       active: false
     },
     {
