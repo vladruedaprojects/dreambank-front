@@ -23,6 +23,7 @@ import IAccount from '@/models/account'
 })
 export default class AllAccounts extends Vue {
   selectedItem: object = {}
+  totalBalance: number = 0
 
   headers: object = [
     {
@@ -80,6 +81,11 @@ export default class AllAccounts extends Vue {
 
   async getAccounts() {
     this.accounts = await this.$axios.$get('/account/all')
+    this.totalBalance = this.accounts.reduce((total: number, item: IAccount) => {
+      total += item.balance
+      return total
+    }, 0)
+    this.$store.commit('setTotalBalance', this.totalBalance)
   }
 
   goTransactions (account: IAccount) {

@@ -28,7 +28,14 @@
           </v-list-item-content>
         </v-list-item>
       </v-col>
-      <v-col v-if="!smallScreen" cols="5" lg="4" md="4"></v-col>
+      <v-col v-if="!smallScreen" cols="5" lg="4" md="4" class="white--text mt-3">
+        <div class="caption">
+          Total Balance
+        </div>
+        <div class="title">
+          {{ totalBalance }}
+        </div>
+      </v-col>
       <v-col cols="12" lg="3" md="4" sm="5" class="px-8">
         <ui-button
           dark
@@ -67,13 +74,20 @@ import IUser from '~/models/user'
   components: { RequestNewProduct }
 })
 export default  class SecondaryBar extends Vue { 
-  // @VModel({ type: Boolean, default: false }) requestDialog!: boolean
   requestDialog: boolean = false
 
   user: IUser = this.$store.state.user
+  formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  })
 
   get smallScreen (): Boolean {
     return this.$vuetify.breakpoint.mdAndDown
+  }
+
+  get totalBalance (): string {
+    return this.formatter.format(this.$store.state.totalBalance)
   }
 }
 </script>

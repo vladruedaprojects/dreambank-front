@@ -13,6 +13,8 @@ export default class user extends VuexModule {
     password: ''
   }
 
+  totalBalance: number = 0
+
   accountQuery: IAccount | null = null
  
   @Mutation
@@ -26,6 +28,11 @@ export default class user extends VuexModule {
   @Mutation
   setAccountQuery(account: IAccount) {
     this.accountQuery = account
+  }
+
+  @Mutation
+  setTotalBalance(value: number) {
+    this.totalBalance = value
   }
 
 }
