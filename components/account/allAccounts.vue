@@ -55,6 +55,7 @@ export default class AllAccounts extends Vue {
       align: 'left',
       sortable: true,
       value: 'status',
+      type: 'status',
       class: 'primary--text'
     },
     {
@@ -69,6 +70,7 @@ export default class AllAccounts extends Vue {
       align: 'right',
       sortable: true,
       value: 'balance',
+      type: 'currency',
       class: 'primary--text'
     }
   ]

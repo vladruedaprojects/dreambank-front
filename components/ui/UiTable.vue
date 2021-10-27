@@ -34,6 +34,9 @@
           <td v-else-if="header.type === 'date'" :key="i" :align="header.align">
             {{ formatDateTime(!header.subValue ? item[header.value] : item[header.value][header.subValue]) }}
           </td>
+          <td v-else-if="header.type === 'status'" :key="i" :align="header.align">
+            {{ (!header.subValue ? item[header.value] : item[header.value][header.subValue]) ? 'Active' : 'Deactivated' }}
+          </td>
           <td v-else-if="header.type === 'currency'" :key="i" :align="header.align" :class="item[header.value] < 0 ? 'error--text' : ''">
             {{ formatter.format(!header.subValue ? item[header.value] : item[header.value][header.subValue]) }}
           </td>
@@ -70,7 +73,7 @@ export default class UiTable extends Vue {
   }
 
   formatDateTime (date: string) {
-    return moment(date).format('DD/MM/YYYY')
+    return moment(date).format('DD/MM/YYYY hh:mm a')
   }
 
 }

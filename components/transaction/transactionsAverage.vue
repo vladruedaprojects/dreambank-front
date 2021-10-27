@@ -1,14 +1,16 @@
 <template>
   <v-container>
-    <ui-card class="px-10 py-4 mx-10 mt-1">
+    <ui-card class="px-10 py-5 mx-10 mt-1">
       <div class="title primary--text">
         Tansactions Average
+        <v-divider></v-divider>
       </div>
       <v-form ref="form">
-        <v-row>
+        <v-row justify="center" class="mt-1">
           <v-col
             cols="12"
             sm="6"
+            class="text-center"
           >
             <div
               v-if="average !== null"
@@ -69,6 +71,7 @@
           <v-col
             cols="12"
             sm="6"
+            class="text-center"
           >
             <v-date-picker
               v-model="dates"
