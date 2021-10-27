@@ -16,7 +16,7 @@ export default class TransactionsByAccount extends Vue {
 
   created () {
     if (this.$route.params) {
-      this.accountId = this.$route.params._id
+      this.accountId = this.$route.params.id
     }
   }
 
