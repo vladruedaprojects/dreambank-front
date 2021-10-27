@@ -51,7 +51,7 @@ export default class Transaction extends Vue {
       text: 'Date',
       align: 'left',
       sortable: false,
-      value: 'date',
+      value: 'createdAt',
       type: 'date',
       class: 'primary--text'
     },
@@ -74,6 +74,7 @@ export default class Transaction extends Vue {
       align: 'right',
       sortable: true,
       value: 'amount',
+      type: 'currency',
       class: 'primary--text'
     },
     {
@@ -81,6 +82,7 @@ export default class Transaction extends Vue {
       align: 'right',
       sortable: true,
       value: 'balance',
+      type: 'currency',
       class: 'primary--text'
     }
   ]

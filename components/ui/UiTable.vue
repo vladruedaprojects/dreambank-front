@@ -31,6 +31,12 @@
               {{ !header.subValue ? item[header.value] : item[header.value][header.subValue] }}
             </v-icon>
           </td>
+          <td v-else-if="header.type === 'date'" :key="i" :align="header.align">
+            {{ formatDateTime(!header.subValue ? item[header.value] : item[header.value][header.subValue]) }}
+          </td>
+          <td v-else-if="header.type === 'currency'" :key="i" :align="header.align">
+            {{ formatter.format(!header.subValue ? item[header.value] : item[header.value][header.subValue]) }}
+          </td>
           <td v-else :key="i" :align="header.align">
             {{ !header.subValue ? item[header.value] : item[header.value][header.subValue] }}
           </td>
@@ -42,6 +48,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import moment from 'moment'
 
 @Component
 export default class UiTable extends Vue {
@@ -52,9 +59,18 @@ export default class UiTable extends Vue {
   selected: object = []
   selectedItem: object = {}
 
+  formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  })
+
   select (item: any): void  {
     this.selectedItem = item
     this.$emit('selected', item)
+  }
+
+  formatDateTime (date: string) {
+    return moment(date).format('DD/MM/YYYY')
   }
 
 }
