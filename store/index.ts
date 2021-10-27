@@ -3,7 +3,7 @@ import IAccount from '~/models/account'
 import IUser from '~/models/user'
  
 @Module
-export default class user extends VuexModule {
+export default class IndexStore extends VuexModule {
   user: IUser = {
     _id: null,
     idCard: '',

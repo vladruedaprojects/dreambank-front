@@ -80,8 +80,8 @@ export default class DrawerMaster extends Vue {
     { header: 'TRANSACTIONS' },
     {
       title: 'Inquire Transactions',
-      to: '/account/transactions',
-      active: false
+      to: '/transaction/inquireTransactions',
+      active: true
     },
     {
       title: 'Fund Transfer',
